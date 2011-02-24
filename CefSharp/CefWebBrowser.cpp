@@ -213,6 +213,27 @@ namespace CefSharp
         ConsoleMessage(this, gcnew ConsoleMessageEventArgs(message, source, line));
     }
 
+    void CefWebBrowser::DisplayToolTip(String^ text)
+    {
+        if (text == _toolTipText)
+        {
+            return;
+        }
+
+        _toolTipText = text;
+
+        if (String::IsNullOrEmpty(_toolTipText)) {
+            _toolTip->Hide(this);
+        }
+        else
+        {
+            Point point = System::Windows::Forms::Cursor::Position;
+            point = PointToClient(point);
+            point.Y += Cursor->Size.Height / 2;
+            _toolTip->Show(_toolTipText, this, point, Int16::MaxValue);
+        }
+    }
+
     void CefWebBrowser::WaitForInitialized()
     {
         if (IsInitialized) return;

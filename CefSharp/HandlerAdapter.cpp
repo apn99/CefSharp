@@ -116,4 +116,10 @@ namespace CefSharp
         return RV_CONTINUE;
     }
 
+    CefHandler::RetVal HandlerAdapter::HandleTooltip(CefRefPtr<CefBrowser> browser, CefString& text)
+    {
+        String^ textStr = toClr(text);
+        _browserControl->BeginInvoke(gcnew Action<String^>(_browserControl, &CefWebBrowser::DisplayToolTip), textStr);
+        return RV_CONTINUE;
+    }
 }

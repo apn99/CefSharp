@@ -9,6 +9,7 @@
 
 using namespace System;
 using namespace System::ComponentModel;
+using namespace System::Drawing;
 using namespace System::Windows::Forms;
 using namespace System::Threading;
 
@@ -28,6 +29,9 @@ namespace CefSharp
         IBeforeResourceLoad^ _beforeResourceLoadHandler;       
         MCefRefPtr<HandlerAdapter> _handlerAdapter;
 
+        String^ _toolTipText;
+        ToolTip^ _toolTip;
+
         AutoResetEvent^ _runJsFinished;
         RtzCountdownEvent^ _loadCompleted;
         ManualResetEvent^ _browserInitialized;
@@ -38,7 +42,6 @@ namespace CefSharp
         virtual void OnGotFocus(EventArgs^ e) override;
 
     internal:
-
         virtual void OnInitialized();
         
         void SetTitle(String^ title);
@@ -48,10 +51,11 @@ namespace CefSharp
         void AddFrame(CefRefPtr<CefFrame> frame);
         void FrameLoadComplete(CefRefPtr<CefFrame> frame);
 
-        
         void SetJsResult(String^ result);
         void SetJsError();
+
         void RaiseConsoleMessage(String^ message, String^ source, int line);
+        void DisplayToolTip(String^ text);
 
     private:
         void Construct(String^ address)
@@ -60,6 +64,13 @@ namespace CefSharp
             _runJsFinished = gcnew AutoResetEvent(false);
             _browserInitialized = gcnew ManualResetEvent(false);
             _loadCompleted = gcnew RtzCountdownEvent();
+
+            _toolTip = gcnew ToolTip();
+            _toolTip->Active = true;
+            _toolTip->ShowAlways = true;
+            _toolTip->AutoPopDelay = 5000;
+            _toolTip->ReshowDelay = 250;
+            _toolTip->InitialDelay = 100;
 
             if(!CEF::IsInitialized)
             {
