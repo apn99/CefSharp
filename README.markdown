@@ -8,6 +8,24 @@ This project is [BSD](http://www.opensource.org/licenses/bsd-license.php "BSD Li
 NEWS
 ====
 
+2012/01/12 - Update
+-------------------
+
+As most of you are probably aware my work on this repo ended over a year ago, however,
+that doesn't mean that work on CefSharp stopped completely, [@ataranto](https://github.com/ataranto) has been maintaining a much improved
+[fork](https://github.com/ataranto/CefSharp/branches) that keeps CefSharp up to date with CEF and includes WPF support.
+
+https://github.com/ataranto/CefSharp and
+https://github.com/ataranto/CefSharp/tree/cef_update
+
+Also [@fddima](https://github.com/fddima) has created the fantastic CefGlue project, which is also worth checking out.
+
+https://bitbucket.org/fddima/cefglue/wiki/Home
+
+With not enough time to work on this I'm just pleased others have found it useful, happy forking.
+
+T.
+
 2010/12/20 - 0.3 Released
 -------------------------
 - [Download 0.3.1 here](https://github.com/downloads/chillitom/CefSharp/CefSharp-0.3.1.7z "src, bins and examples")
